@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>M-BEAT — Student Selection Registration</title>
+<link rel="icon" type="image/png" href="https://mbeat2026.github.io/loyolacollege/assets/mbeat-logo.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
 
@@ -25,6 +26,8 @@ button { font-family: var(--font-body); cursor: pointer; }
   background: var(--teal); color: #EDEBDF; padding: 14px 20px;
   display: flex; align-items: center; gap: 14px; border-bottom: 3px solid var(--leaf);
 }
+.topbar .logo-strip { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.topbar .logo-strip img { height: 36px; width: auto; }
 .topbar .logo-slot {
   width: 36px; height: 36px; border: 1.3px dashed rgba(237,235,223,0.4); border-radius: 50%;
   display: flex; align-items: center; justify-content: center; font-size: 8px; color: rgba(237,235,223,0.55);
@@ -78,9 +81,12 @@ footer.foot { text-align: center; color: var(--muted); font-size: 12px; margin-t
 <body>
 
 <div class="topbar">
-  <div class="logo-slot">CIMSER</div>
-  <div class="logo-slot">M-BEAT</div>
-  <div class="logo-slot">GCC</div>
+<div class="logo-strip">
+    <img src="https://mbeat2026.github.io/loyolacollege/assets/loyola-logo.png" alt="Loyola College" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-slot',textContent:'LOYOLA'}))">
+    <img src="https://mbeat2026.github.io/loyolacollege/assets/cimser-logo.png" alt="CIMSER" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-slot',textContent:'CIMSER'}))">
+    <img src="https://mbeat2026.github.io/loyolacollege/assets/mbeat-logo.png" alt="M-Beat" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-slot',textContent:'M-BEAT'}))">
+    <img src="https://mbeat2026.github.io/loyolacollege/assets/gcc-logo.png" alt="Greater Chennai Corporation" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'logo-slot',textContent:'GCC'}))">
+  </div>
   <div class="brand">
     <strong>M-BEAT</strong>
     <span>Student Selection · Registration</span>
@@ -92,7 +98,7 @@ footer.foot { text-align: center; color: var(--muted); font-size: 12px; margin-t
   <div class="hero">
     <h1>Welcome to M-BEAT!</h1>
     <div class="org-lines">
-      <strong>By M-BEAT – Student Selection</strong><br>
+      <strong>M-BEAT – Student Selection</strong><br>
       An Initiative by<br>
       Centre for Insect Molecular Studies and Environmental Research (CIMSER)<br>
       PG &amp; Research Department of Advanced Zoology and Biotechnology<br>
@@ -118,10 +124,21 @@ footer.foot { text-align: center; color: var(--muted); font-size: 12px; margin-t
     <ol>
       <li>Only currently enrolled college students are eligible to apply.</li>
       <li>Candidates must be actively involved in M-BEAT activities.</li>
-      <li>Candidates must maintain a minimum attendance.</li>
     </ol>
   </div>
 
+  <div class="info-block">
+    <h2>Benefits</h2>
+    <ol>
+      <li> M-BEAT Membership Certificate</li>
+      <li>Environmental Volunteer Recognition</li>
+      <li>Mosquito & Vector-Control Field Experience</li>
+      <li>Practical Field Assessment Experience</li>
+      <li>Greater Chennai Corporation Collaboration Experience</li>
+      <li>CV / Resume Enhancement</li>
+      <li>Community Service Experience</li>
+    </ol>
+  </div>
   <div class="info-block">
     <h2>Instructions</h2>
     <ol>
@@ -149,7 +166,7 @@ footer.foot { text-align: center; color: var(--muted); font-size: 12px; margin-t
 
     <h2 style="margin-top:28px;">Personal Details</h2>
     <div class="form-grid" style="margin-top:12px;">
-      <div class="field"><label for="fName">Full Name</label><input type="text" id="fName"></div>
+      <div class="field"><label for="fName">Full Name with initials</label><input type="text" id="fName"></div>
       <div class="field">
         <label for="fGender">Gender</label>
         <select id="fGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
