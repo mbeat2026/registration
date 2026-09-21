@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>M-BEAT — Student Selection Registration</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --ink: #16211E; --paper: #F5F3EC; --panel: #FFFFFF;
+  --teal: #0F3D3E; --teal-deep: #0A2C2D; --leaf: #3D8361;
+  --amber: #C7811A; --rust: #B4472F; --line: #D8D3C4; --muted: #6B7570;
+  --font-head: 'Space Grotesk', sans-serif; --font-body: 'Inter', sans-serif;
+  --radius: 4px;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--font-body); line-height: 1.5; }
+h1, h2 { font-family: var(--font-head); margin: 0; letter-spacing: -0.01em; }
+button { font-family: var(--font-body); cursor: pointer; }
+
+.shell { max-width: 780px; margin: 0 auto; padding: 0 20px 64px; }
+
+.topbar {
+  background: var(--teal); color: #EDEBDF; padding: 14px 20px;
+  display: flex; align-items: center; gap: 14px; border-bottom: 3px solid var(--leaf);
+}
+.topbar .logo-slot {
+  width: 36px; height: 36px; border: 1.3px dashed rgba(237,235,223,0.4); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 8px; color: rgba(237,235,223,0.55);
+  text-align: center; line-height: 1.1; flex-shrink: 0;
+}
+.topbar .brand strong { font-family: var(--font-head); font-size: 16px; font-weight: 700; }
+.topbar .brand span { display: block; font-size: 11px; color: rgba(237,235,223,0.7); }
+
+.hero { text-align: center; padding: 44px 20px 30px; }
+.hero h1 { font-size: 28px; margin-bottom: 10px; color: var(--teal-deep); }
+.hero .org-lines { font-size: 13.5px; color: var(--muted); max-width: 540px; margin: 0 auto; line-height: 1.6; }
+.hero .org-lines strong { color: var(--ink); }
+
+.info-block { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px 24px; margin-bottom: 16px; }
+.info-block h2 { font-size: 16px; margin-bottom: 12px; color: var(--teal-deep); }
+.info-block ol { margin: 0; padding-left: 20px; font-size: 13.5px; }
+.info-block li { margin-bottom: 7px; }
+
+.form-section { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; margin-top: 20px; }
+.form-section h2 { font-size: 17px; margin-bottom: 4px; }
+.form-section p.section-sub { font-size: 12.5px; color: var(--muted); margin: 0 0 18px; }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; }
+@media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+.form-grid .full { grid-column: 1 / -1; }
+
+.field label { display: block; font-size: 12.5px; font-weight: 600; margin-bottom: 6px; color: var(--teal-deep); }
+.field input, .field select { width: 100%; padding: 11px 12px; font-size: 15px; border: 1.5px solid var(--line); border-radius: var(--radius); font-family: var(--font-body); background: var(--paper); }
+.field input:focus, .field select:focus { outline: none; border-color: var(--leaf); background: #fff; }
+
+.autofill-box { background: #EAF2EC; border: 1px solid #C5DECD; border-radius: var(--radius); padding: 10px 12px; font-size: 13px; }
+.autofill-box .label { font-size: 11px; color: var(--leaf); font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; }
+.autofill-box .value { color: var(--ink); margin-top: 2px; }
+
+.radio-group { display: flex; gap: 16px; padding-top: 4px; }
+.radio-group label { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 500; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 22px; border-radius: var(--radius); border: none; font-weight: 600; font-size: 14.5px; background: var(--teal); color: #fff; }
+.btn:hover { background: var(--teal-deep); }
+.btn:disabled { background: #B8BDB9; cursor: not-allowed; }
+
+.error-msg { background: #FBEAE5; color: var(--rust); border: 1px solid #EBBFB2; padding: 10px 12px; border-radius: var(--radius); font-size: 13.5px; margin-bottom: 14px; }
+
+.success-box { background: var(--panel); border: 1px solid var(--line); border-left: 5px solid var(--leaf); border-radius: var(--radius); padding: 32px; text-align: center; margin-top: 24px; }
+.success-box h2 { font-size: 20px; margin-bottom: 8px; color: var(--teal-deep); }
+.success-box p { font-size: 13.5px; color: var(--muted); }
+
+footer.foot { text-align: center; color: var(--muted); font-size: 12px; margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo-slot">CIMSER</div>
+  <div class="logo-slot">M-BEAT</div>
+  <div class="logo-slot">GCC</div>
+  <div class="brand">
+    <strong>M-BEAT</strong>
+    <span>Student Selection · Registration</span>
+  </div>
+</div>
+
+<div class="shell">
+
+  <div class="hero">
+    <h1>Welcome to M-BEAT!</h1>
+    <div class="org-lines">
+      <strong>By M-BEAT – Student Selection</strong><br>
+      An Initiative by<br>
+      Centre for Insect Molecular Studies and Environmental Research (CIMSER)<br>
+      PG &amp; Research Department of Advanced Zoology and Biotechnology<br>
+      Loyola College (Autonomous), Chennai – 34<br><br>
+      in collaboration with <strong>Greater Chennai Corporation</strong> &amp; <strong>AHC Foundation</strong>
+    </div>
+  </div>
+
+  <div class="info-block">
+    <h2>Objectives</h2>
+    <ol>
+      <li>To identify and eliminate mosquito breeding sources within participating college premises through regular surveillance and source reduction activities by student-led teams.</li>
+      <li>To establish standard operating procedures (SOPs) for maintaining breeding-free campuses.</li>
+      <li>To promote Behavioural Change Communication (BCC) activities for updating college authorities, faculty, students, and support staff on vector surveillance, source reduction, and preventive measures.</li>
+      <li>To institutionalize periodic inspections, self-monitoring, and reporting mechanisms in collaboration with corporation officials.</li>
+      <li>To recognize and certify colleges that consistently maintain breeding-free premises based on predefined criteria.</li>
+      <li>To develop participating colleges as models to replicate this initiative across other educational institutions in Chennai.</li>
+    </ol>
+  </div>
+
+  <div class="info-block">
+    <h2>Eligibility Criteria</h2>
+    <ol>
+      <li>Only currently enrolled college students are eligible to apply.</li>
+      <li>Candidates must be actively involved in M-BEAT activities.</li>
+      <li>Candidates must maintain a minimum attendance.</li>
+    </ol>
+  </div>
+
+  <div class="info-block">
+    <h2>Instructions</h2>
+    <ol>
+      <li>Confirmation will be sent through mail and will be added in the WhatsApp group.</li>
+    </ol>
+  </div>
+
+  <div id="formSection" class="form-section">
+    <h2>Registration Form</h2>
+    <p class="section-sub">All fields are required.</p>
+    <div id="formError"></div>
+
+    <div class="form-grid">
+      <div class="field full">
+        <label for="collegeSelect">College</label>
+        <select id="collegeSelect"><option value="">Loading colleges…</option></select>
+      </div>
+      <div class="field full" id="autofillWrap" style="display:none;">
+        <div class="autofill-box"><div class="label">Category</div><div class="value" id="autofillCategory">—</div></div>
+      </div>
+      <div class="field full" id="autofillLocWrap" style="display:none;">
+        <div class="autofill-box"><div class="label">Location</div><div class="value" id="autofillLocation">—</div></div>
+      </div>
+    </div>
+
+    <h2 style="margin-top:28px;">Personal Details</h2>
+    <div class="form-grid" style="margin-top:12px;">
+      <div class="field"><label for="fName">Full Name</label><input type="text" id="fName"></div>
+      <div class="field">
+        <label for="fGender">Gender</label>
+        <select id="fGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select>
+      </div>
+      <div class="field"><label for="fMobile">Mobile Number</label><input type="tel" id="fMobile" placeholder="10-digit mobile number"></div>
+      <div class="field"><label for="fDob">Date of Birth</label><input type="date" id="fDob"></div>
+      <div class="field"><label for="fPersonalEmail">Personal Email</label><input type="email" id="fPersonalEmail"></div>
+      <div class="field"><label for="fCollegeEmail">College Email</label><input type="email" id="fCollegeEmail"></div>
+      <div class="field full"><label for="fAddress">Address</label><input type="text" id="fAddress" placeholder="Full residential address"></div>
+      <div class="field"><label for="fRegNumber">College Registration / Department / Roll Number</label><input type="text" id="fRegNumber"></div>
+      <div class="field">
+        <label>Hosteller?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="hosteller" value="Yes"> Yes</label>
+          <label><input type="radio" name="hosteller" value="No"> No</label>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" id="submitBtn" style="margin-top:24px;width:100%;">Submit registration</button>
+  </div>
+
+  <div id="successBox" class="success-box" style="display:none;">
+    <h2>Registration received</h2>
+    <p>Thank you for registering with M-BEAT. Confirmation will be sent through mail and you will be added to the WhatsApp group.</p>
+  </div>
+
+  <footer class="foot">
+    Centre for Insect Molecular Studies &amp; Environmental Research · PG &amp; Research Dept. of Advanced Zoology &amp; Biotechnology, Loyola College (Autonomous), Chennai — in collaboration with Greater Chennai Corporation &amp; AHC Foundation
+  </footer>
+</div>
+
+<script>
+// ---- CONFIGURE THIS after deploying Code.gs ----
+const API_URL = 'https://script.google.com/macros/s/AKfycbxlcuBpTB1egZ-vFqiJ51X2L3uLmLDDZWZv5b0XOTJ0XURUj0ypjcWXakkImMOaXFndMw/exec';
+
+async function call(action, payload) {
+  const res = await fetch(API_URL, { method: 'POST', body: JSON.stringify(Object.assign({ action }, payload || {})) });
+  return res.json();
+}
+function escapeHtml(str) { const d = document.createElement('div'); d.textContent = str; return d.innerHTML; }
+
+let collegesCache = [];
+
+async function loadColleges() {
+  const select = document.getElementById('collegeSelect');
+  try {
+    const r = await call('getColleges', {});
+    if (!r.ok || !r.colleges.length) { select.innerHTML = '<option value="">No colleges available yet — contact the coordinators</option>'; return; }
+    collegesCache = r.colleges;
+    select.innerHTML = '<option value="">Select your college</option>' +
+      r.colleges.map(c => `<option value="${escapeHtml(c.name)}">${escapeHtml(c.name)}</option>`).join('');
+  } catch (e) {
+    select.innerHTML = '<option value="">Could not load colleges — check your connection</option>';
+  }
+}
+
+document.getElementById('collegeSelect').addEventListener('change', function () {
+  const chosen = collegesCache.find(c => c.name === this.value);
+  const catWrap = document.getElementById('autofillWrap');
+  const locWrap = document.getElementById('autofillLocWrap');
+  if (chosen) {
+    document.getElementById('autofillCategory').textContent = chosen.category;
+    document.getElementById('autofillLocation').textContent = chosen.location;
+    catWrap.style.display = 'block';
+    locWrap.style.display = 'block';
+  } else {
+    catWrap.style.display = 'none';
+    locWrap.style.display = 'none';
+  }
+});
+
+document.getElementById('submitBtn').addEventListener('click', async () => {
+  const errBox = document.getElementById('formError');
+  errBox.innerHTML = '';
+
+  const hostellerEl = document.querySelector('input[name="hosteller"]:checked');
+  const form = {
+    collegeName: document.getElementById('collegeSelect').value,
+    name: document.getElementById('fName').value.trim(),
+    gender: document.getElementById('fGender').value,
+    mobile: document.getElementById('fMobile').value.trim(),
+    dob: document.getElementById('fDob').value,
+    personalEmail: document.getElementById('fPersonalEmail').value.trim(),
+    collegeEmail: document.getElementById('fCollegeEmail').value.trim(),
+    address: document.getElementById('fAddress').value.trim(),
+    regNumber: document.getElementById('fRegNumber').value.trim(),
+    hosteller: hostellerEl ? hostellerEl.value : ''
+  };
+
+  const missing = Object.entries(form).filter(([k, v]) => !v);
+  if (missing.length) { errBox.innerHTML = '<div class="error-msg">Please fill in every field before submitting.</div>'; return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = 'Submitting…';
+  try {
+    const r = await call('submitApplication', { form });
+    if (!r.ok) { errBox.innerHTML = `<div class="error-msg">${escapeHtml(r.error)}</div>`; return; }
+    document.getElementById('formSection').style.display = 'none';
+    document.getElementById('successBox').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } catch (e) {
+    errBox.innerHTML = '<div class="error-msg">Could not reach the server. Check your connection and try again.</div>';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Submit registration';
+  }
+});
+
+loadColleges();
+</script>
+</body>
+</html>
